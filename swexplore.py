@@ -25,33 +25,23 @@ while not done:
         continue
 
     choice = input("\n==> Would you like to explore the characters (C), planets (P), vehicles (V), starships (S), or attributes (A) of %s? Select one: " % (film["title"]))
+    print('')
+
     if choice.lower() == 'c':
         urls = film["characters"]
-        chars = getItemList(urls, "name")
-        charChoice = input("\n==> Which character would you like to explore? Select a valid number: ")
-        char = chars[int(charChoice) - 1]
-        printAttributes(char)
+        promptForItem(urls, "character")
 
     elif choice.lower() == 'p':
         urls = (film["planets"])
-        planets = getItemList(urls, "name")
-        planetChoice = input("\n==> Which planet would you like to explore? Select a valid number: ")
-        planet = planets[int(planetChoice) - 1]
-        printAttributes(planet)
+        promptForItem(urls, "planet")
 
     elif choice.lower() == 'v':
         urls = (film["vehicles"])
-        vehicles = getItemList(urls, "name")
-        vehicleChoice = input("\n==> Which vehicle would you like to explore? Select a valid number: ")
-        vehicle = vehicles[int(vehicleChoice) - 1]
-        printAttributes(vehicle)
+        promptForItem(urls, "vehicle")
 
     elif choice.lower() == 's':
         urls = (film["starships"])
-        starships = getItemList(urls, "name")
-        starshipChoice = input("\n==> Which starship would you like to explore? Select a valid number: ")
-        starship = planets[int(starshipChoice) - 1]
-        printAttributes(starship)
+        promptForItem(urls, "starship")
 
     elif choice.lower() == 'a':
         printAttributes(film)

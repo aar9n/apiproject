@@ -45,8 +45,11 @@ def printAttributes(item):
         if type(item[key]) is not list:
             print("%s: %s" % (key.title(), value))
 
-
-
+def promptForItem(urls, swType):
+    items = getItemList(urls, "name")
+    itemChoice = input("\n==> Which %s would you like to explore? Select a valid number: " % swType)
+    item = items[int(itemChoice) - 1]
+    printAttributes(item)
 
 # def compare(item1, item2):
 #     if item1["episode_id"] > item2["episode_id"]:
