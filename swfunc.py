@@ -28,14 +28,16 @@ def printItems(lst, key):
         print("%d. %s" % (idx, item[key]))
         idx = idx + 1
 
-def getItemList(urls):
-    charList = []
+def getItemList(urls, name):
+    itemList = []
     for url in urls:
-        char = getItem(url)
-        charList.append(char)
-    printItems(charList, "name")
+        item = getItem(url)
+        itemList.append(item)
+    printItems(itemList, name)
+    return itemList
 
 def printAttributes(item):
+    print('')
     for key in item:
         value = str(item[key])
         if key == 'opening_crawl':

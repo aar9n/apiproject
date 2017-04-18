@@ -25,30 +25,36 @@ while not done:
         continue
 
     choice = input("\n==> Would you like to explore the characters (C), planets (P), vehicles (V), starships (S), or attributes (A) of %s? Select one: " % (film["title"]))
-    print('')
     if choice.lower() == 'c':
-        urls = (film["characters"])
-        getItemList(urls)
+        urls = film["characters"]
+        chars = getItemList(urls, "name")
+        charChoice = input("\n==> Which character would you like to explore? Select a valid number: ")
+        char = chars[int(charChoice) - 1]
+        printAttributes(char)
 
     elif choice.lower() == 'p':
         urls = (film["planets"])
-        getItemList(urls)
+        planets = getItemList(urls, "name")
+        planetChoice = input("\n==> Which planet would you like to explore? Select a valid number: ")
+        planet = planets[int(planetChoice) - 1]
+        printAttributes(planet)
 
     elif choice.lower() == 'v':
         urls = (film["vehicles"])
-        getItemList(urls)
+        vehicles = getItemList(urls, "name")
+        vehicleChoice = input("\n==> Which vehicle would you like to explore? Select a valid number: ")
+        vehicle = vehicles[int(vehicleChoice) - 1]
+        printAttributes(vehicle)
 
     elif choice.lower() == 's':
         urls = (film["starships"])
-        getItemList(urls)
+        starships = getItemList(urls, "name")
+        starshipChoice = input("\n==> Which starship would you like to explore? Select a valid number: ")
+        starship = planets[int(starshipChoice) - 1]
+        printAttributes(starship)
 
     elif choice.lower() == 'a':
-        for key in film:
-            value = str(film[key])
-            if key == 'opening_crawl':
-                value = "\n" + value + "\n"
-            if type(film[key]) is not list:
-                print("%s: %s" % (key.title(), value))
+        printAttributes(film)
 
     elif choice.lower() == 'q':
         done = True
