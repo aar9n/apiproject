@@ -2,6 +2,12 @@ import requests
 import json
 
 def getAllPages(url):
+"""
+When there are multiple pages pertaining to a single list of objects,
+this function loads in all of the pages and extends the list. For example,
+in swapi.co, there are 87 characters in the Star Wars universe. Because swapi.co
+only returns 10 items at a time, getAllPages makes 9 requests.
+"""
     done = False
     results = []
     while not done:
@@ -18,17 +24,28 @@ def getAllPages(url):
     return results
 
 def getItem(url):
+"""
+Returns any single item with a url as a dictionary.
+"""
     r = requests.get(url)
     item = json.loads(r.content)
     return item
 
 def printItems(lst, key):
+"""
+Assigns sequential integers to each item in a list, printing the key attribute
+of each item.
+"""
     idx = 1
     for item in lst:
         print("%d. %s" % (idx, item[key]))
         idx = idx + 1
 
 def getItemList(urls, name):
+"""
+Requests each individual url, taking their responses and putting them in a list.
+It also prints an indexed list of the resources' name attributes.
+"""
     itemList = []
     for url in urls:
         item = getItem(url)
@@ -37,6 +54,11 @@ def getItemList(urls, name):
     return itemList
 
 def printAttributes(item):
+"""
+Takes the non-list attributes of a dictionary and prints them out in a formatted
+manner. When printing the opening_crawl attribute of the "film" items, printAttributes
+adds extra newlines.
+"""
     for key in item:
         value = str(item[key])
         if key == 'opening_crawl':
@@ -45,6 +67,10 @@ def printAttributes(item):
             print("%s: %s" % (key.title(), value))
 
 def promptForItem(items, swType):
+"""
+The innermost while loop of swexplore. It prompts the user to explore a different
+item or to return to a previous menu.
+"""
     done = False
     while not done:
         itemChoice = input("\n==> Enter the number of a %s to explore, or select B to go back: " % swType)
@@ -57,18 +83,3 @@ def promptForItem(items, swType):
                 printAttributes(item)
         except:
             print('Invalid entry: ' + itemChoice + '. Try again!')
-
-
-# def goBack()
-
-# def compare(item1, item2):
-#     if item1["episode_id"] > item2["episode_id"]:
-#         return 1
-#     elif item1["episode_id"] < item2["episode_id"]:
-#         return -1
-#     else:
-#         return 0
-#
-# def sortFilms(films):
-#     for film in films:
-#         compare(film, )
