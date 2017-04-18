@@ -10,10 +10,10 @@ def main():
     """
     filmurl = "http://swapi.co/api/films"
     films = getAllPages(filmurl)
-    print('\nFilms:')
-    printItems(films, "title")
     done = False
     while not done:
+        print('\nFilms:')
+        printItems(films, "title")
         choice = input('\n==> Enter the number of the film you would like to explore: ')
         try:
             if choice.lower() == 'q':
@@ -27,7 +27,7 @@ def main():
 
         while not done:
             print('Current film: ' + film["title"])
-            choice = input("\n==> Would you like to explore the characters (C), planets (P), vehicles (V), starships (S), or attributes (A) of %s? Select one: " % (film["title"]))
+            choice = input("\n==> Enter (C)haracters, (P)lanets, (V)ehicles, (S)tarships, (A)ttributes, (B)ack, or (Q)uit: ")
             print('')
 
             if choice.lower() == 'c':
@@ -57,6 +57,9 @@ def main():
             elif choice.lower() == 'a':
                 printAttributes(film)
                 print('')
+
+            elif choice.lower() == 'b':
+                break
 
             elif choice.lower() == 'q':
                 done = True
