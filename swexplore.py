@@ -9,7 +9,7 @@ print('Films:')
 printItems(films, "title")
 done = False
 while not done:
-    choice = input('Enter the number of the film you would like to explore: ')
+    choice = input('\n==> Enter the number of the film you would like to explore: ')
     validStrs = [str(x) for x in range(1, len(films) + 1)]
 
     if choice in validStrs:
@@ -24,8 +24,8 @@ while not done:
         print('Invalid entry.' +  'Try again!')
         continue
 
-    choice = input("Would you like to explore the characters (C), planets (P), vehicles (V), or starships (S) of %s? Select one: " % (film["title"]))
-
+    choice = input("\n==> Would you like to explore the characters (C), planets (P), vehicles (V), starships (S), or attributes (A) of %s? Select one: " % (film["title"]))
+    print('')
     if choice.lower() == 'c':
         urls = (film["characters"])
         getItemList(urls)
@@ -41,6 +41,14 @@ while not done:
     elif choice.lower() == 's':
         urls = (film["starships"])
         getItemList(urls)
+
+    elif choice.lower() == 'a':
+        for key in film:
+            value = str(film[key])
+            if key == 'opening_crawl':
+                value = "\n" + value + "\n"
+            if type(film[key]) is not list:
+                print("%s: %s" % (key.title(), value))
 
     elif choice.lower() == 'q':
         done = True
