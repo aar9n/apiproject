@@ -35,6 +35,13 @@ def getItemList(urls):
         charList.append(char)
     printItems(charList, "name")
 
+def printAttributes(item):
+    for key in item:
+        value = str(item[key])
+        if key == 'opening_crawl':
+            value = "\n" + value + "\n"
+        if type(item[key]) is not list:
+            print("%s: %s" % (key.title(), value))
 
 
 
