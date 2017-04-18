@@ -5,11 +5,11 @@ def getAllPages(url):
     done = False
     results = []
     while not done:
-        print("Requesting %s" % (url))
+        # print("Requesting %s" % (url))
         r = requests.get(url)
         page = json.loads(r.content)
         items = page["results"]
-        print("Retrieved %d items" % (len(items)))
+        # print("Retrieved %d items" % (len(items)))
         results += items
         if page["next"]:
             url = page["next"]
@@ -37,7 +37,6 @@ def getItemList(urls, name):
     return itemList
 
 def printAttributes(item):
-    print('')
     for key in item:
         value = str(item[key])
         if key == 'opening_crawl':
@@ -45,11 +44,22 @@ def printAttributes(item):
         if type(item[key]) is not list:
             print("%s: %s" % (key.title(), value))
 
-def promptForItem(urls, swType):
-    items = getItemList(urls, "name")
-    itemChoice = input("\n==> Which %s would you like to explore? Select a valid number: " % swType)
-    item = items[int(itemChoice) - 1]
-    printAttributes(item)
+def promptForItem(items, swType):
+    done = False
+    while not done:
+        itemChoice = input("\n==> Enter the number of a %s to explore, or select B to go back: " % swType)
+        print('')
+        try:
+            if itemChoice.lower() == 'b':
+                done = True
+            else:
+                item = items[int(itemChoice) - 1]
+                printAttributes(item)
+        except:
+            print('Invalid entry: ' + itemChoice + '. Try again!')
+
+
+# def goBack()
 
 # def compare(item1, item2):
 #     if item1["episode_id"] > item2["episode_id"]:
